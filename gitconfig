@@ -1,0 +1,19 @@
+[alias]
+	b = branch
+	c = commit
+	co = checkout
+	cob = checkout -b
+	s = status
+  p = push
+  publish = "!git push -u origin $(git branch-name)"
+  unstage = reset HEAD --
+[core]
+	excludesfile = ~/.gitignore
+[credential]
+	helper = osxkeychain
+[push]
+  default = current
+[user]
+	email = kelsey.pedersen@stitchfix.com
+	name = Kelsey Pedersen
+

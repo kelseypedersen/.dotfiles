@@ -122,6 +122,8 @@ set statusline+=
 
 " ===================== NAVIGATION ====================
 
+runtime macros/matchit.vim    " Jump to keyword pairs with '%' key
+
 " +++++ Reminders +++++
 map <Left> :echo "No! Use H"<cr>
 map <Right> :echo "No! Use L"<cr>

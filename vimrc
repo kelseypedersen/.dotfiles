@@ -42,115 +42,82 @@ Plug 'plasticboy/vim-markdown'              " Syntax highlighting for markdown
 call plug#end()
 
 " ===================== GENERAL =====================
-"
-set backspace=indent,eol,start  " Add regular backspace
+set backspace=indent,eol,start " ... Add regular backspace
 set encoding=utf-8
-set fileformat=unix             " Standard fileformat
-set nocompatible                " Required
-set spell spelllang=en_us       " US English spellcheck
+set fileformat=unix " .............. Standard fileformat
+set nocompatible " ................. Required
+set spell spelllang=en_us " ........ US English spellcheck
 
 " ===================== VISUAL ====================
 
 " +++++ Colors +++++
-colorscheme OceanicNext         " Set color theme to OceanicNext
-set t_Co=256                    " Config for color theme
-set termguicolors               " Config for color theme
+colorscheme OceanicNext " .......... Set color theme to OceanicNext
+set t_Co=256 " ..................... Needed for color theme
+set termguicolors " ................ Needed for color theme
 syntax on
 
 " +++++ Indentation +++++
 filetype plugin indent on
-set autoindent                  " Keep indentation of previous line
-set expandtab                   " Tab in insert mode produces the correct number of spaces
-set shiftwidth=2                " Number of columns text indented with << or >>
-set smartindent                 " Indent matches style of the file
-set softtabstop=2               " Use 2 columns for tab in insert mode
-set tabstop=2                   " Tab appears 2 spaces
+set autoindent " ................... Keep indentation of previous line
+set expandtab " .................... Tab in insert mode produces the correct number of spaces
+set shiftwidth=2 " ................. Number of columns text indented with << or >>
+set smartindent " .................. Indent matches style of the file
+set softtabstop=2 " ................ Use 2 columns for tab in insert mode
+set tabstop=2 " .................... Tab appears 2 spaces
 
 " +++++ Position +++++
-set number                      " Display line numbers on left-hand side
-set ruler                       " Display line and column position
+set number " ....................... Display line numbers on left-hand side
+set ruler " ........................ Display line and column position
 
-set gdefault                    " All matches in replace on one line are substituted
-set hidden                      " Keep undo history for background buffers
-set ignorecase                  " Insensitive case searching
-set laststatus=2                " Display status line
+set gdefault " ..................... All matches in replace on one line are substituted
+set hidden " ....................... Keep undo history for background buffers
+set ignorecase " ................... Insensitive case searching
+set laststatus=2 " ................. Display status line
 set linebreak
 set nolist
 set noundofile
 set scrolloff=3
-set showcmd                     " Show partial commands in last line
-set showmode                    " Show mode in last line
+set showcmd " ...................... Show partial commands in last line
+set showmode " ..................... Show mode in last line
 set smartcase
-set ttyfast                     " Faster scrolling
-set wildmenu                    " Command line completion
-set wildmode=list:longest       " Command line complettion
-set wrap                        " Wrap lines
+set ttyfast " ...................... Faster scrolling
+set wildmenu " ..................... Command line completion
+set wildmode=list:longest " ........ Command line complettion
+set wrap " ......................... Wrap lines
 nnoremap / /\v
 vnoremap / /\v
 noremap <tab> %
 vnoremap <tab> %
 set formatoptions=qrn1
 
-" +++++ Status Line Bar +++++
-
-" https://shapeshed.com/vim-statuslines/
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
-
-hi statusline guifg=black guibg=yellow ctermfg=blue ctermbg=green
-
-set statusline=
-set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
-set statusline+=%#LineNr#
-set statusline+=\ %f
-set statusline+=%m
-set statusline+=%=
-set statusline+=%#CursorColumn#
-set statusline+=\ %y
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\[%{&fileformat}\]
-set statusline+=\ %p%%
-set statusline+=\ %l:%c
-set statusline+=
-
 " ===================== NAVIGATION ====================
-
-runtime macros/matchit.vim    " Jump to keyword pairs with '%' key
+runtime macros/matchit.vim " ...... Jump to keyword pairs with '%' key
 
 " +++++ Reminders +++++
 map <Left> :echo "No! Use H"<cr>
 map <Right> :echo "No! Use L"<cr>
 map <Up> :echo "No! Use K"<cr>
 map <Down> :echo "No! Use J"<cr>
-" +++++ Split Screens +++++
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
 
+" +++++ NERDTree Config +++++
 autocmd vimenter * NERDTree
+" Use control + n to toggle NERDTree open and closed
 map <C-n> :NERDTreeToggle<CR>
 
 " ==================== SEARCH ====================
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+" Use control + p for fuzzy finder
 nnoremap <C-p> :<C-u>FZF<CR>
+" Use control + b for buffers
 nnoremap <C-b> :<C-u>Buffers<CR>
 nnoremap <C-g> :<C-u>GFiles?<CR>
 
-set incsearch                   " Use / to search in file
-set showmatch                   " Highlight matches
+set incsearch " .................... Use / to search in file
+set showmatch " .................... Highlight matches
 set hlsearch
 set rtp+=/usr/local/opt/fzf
 
-" Global find and replace
-
+" +++++ Global Find and Replace +++++
 let mapleader = "\<Space>"
 nnoremap <leader>fr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap <leader>frc :%s/\<<C-r><C-w>\>//gc<Left><Left>

@@ -12,3 +12,8 @@
 - This creates a symlink to the `.dotfiles` directory
 - The symlink files are represented WITHOUT a dot before the name
 - E.g. `/Users/kelseypedersen1/.vimrc` -> `/Users/kelseypedersen1/.dotfiles/vimrc`
+
+## How to Push Changes to Github
+- Sym link between .vimrc --> .dotfiles/vimrc
+- To update, go to ~/.dotfiles
+- Add changes to git, commit and push to repo

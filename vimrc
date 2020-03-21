@@ -6,7 +6,6 @@
 
 " ADD the :e leader command
 " ADD the rename.vim
-" ADD vim-test`
 " ADD set autowrite - to save buffers
 " ADD the git diff window thing
 " Add command for fuzzy finding and opening remote branches in git
@@ -18,10 +17,9 @@
 
 " ===================== PLUGINS =====================
 call plug#begin()
-Plug 'ajh17/VimCompletesMe'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'               " Show + or - for line changes
+Plug 'ajh17/VimCompletesMe'                 " Autocomplete from tab key
+Plug 'godlygeek/tabular'                    " Must come before vim-markdown
 Plug 'janko-m/vim-test'                     " Run tests from commandline
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Download and build FZF - the command line utility
 Plug 'junegunn/fzf.vim'                     " File search for vim
@@ -32,31 +30,32 @@ Plug 'mhinz/vim-grepper'                    " Searching for words
 Plug 'milkypostman/vim-togglelist'          " Show & hide the search results
 Plug 'mxw/vim-jsx'                          " JSX syntax in React/Javascript
 Plug 'pangloss/vim-javascript'              " Javascript syntax
+Plug 'plasticboy/vim-markdown'              " Syntax highlighting for markdown
+Plug 'scrooloose/nerdtree'                  " Show file structure in left rail
 Plug 'styled-components/vim-styled-components' " Styled components syntax
 Plug 'tpope/vim-endwise'                    " Ruby - Auto add 'end' to do/if in Ruby
 Plug 'tpope/vim-fugitive'                   " Use git commands in Vim
 Plug 'tpope/vim-rails'                      " Ruby - Projectionist settings
 Plug 'tpope/vim-unimpaired'                 " Bracket mappings for a lot of random things
-Plug 'godlygeek/tabular'                    " Must come before vim-markdown
-Plug 'plasticboy/vim-markdown'              " Syntax highlighting for markdown
+Plug 'Xuyuanp/nerdtree-git-plugin'          " Show git status flags in Nerdtree
 call plug#end()
 
 " ===================== GENERAL =====================
 set backspace=indent,eol,start " ... Add regular backspace
-set encoding=utf-8
+set encoding=utf-8 " ............... Required
 set fileformat=unix " .............. Standard fileformat
 set nocompatible " ................. Required
 set spell spelllang=en_us " ........ US English spellcheck
+let g:vim_markdown_folding_disabled = 1 " Remove folding in markdown
 
 " ===================== VISUAL ====================
-
-" +++++ Colors +++++
+" +++++ colors +++++
 colorscheme OceanicNext " .......... Set color theme to OceanicNext
 set t_Co=256 " ..................... Needed for color theme
 set termguicolors " ................ Needed for color theme
 syntax on
 
-" +++++ Indentation +++++
+" +++++ indentation +++++
 filetype plugin indent on
 set autoindent " ................... Keep indentation of previous line
 set expandtab " .................... Tab in insert mode produces the correct number of spaces
@@ -65,7 +64,7 @@ set smartindent " .................. Indent matches style of the file
 set softtabstop=2 " ................ Use 2 columns for tab in insert mode
 set tabstop=2 " .................... Tab appears 2 spaces
 
-" +++++ Position +++++
+" +++++ position +++++
 set number " ....................... Display line numbers on left-hand side
 set ruler " ........................ Display line and column position
 
@@ -93,14 +92,15 @@ set formatoptions=qrn1
 " ===================== NAVIGATION ====================
 runtime macros/matchit.vim " ...... Jump to keyword pairs with '%' key
 
-" +++++ Reminders +++++
+" +++++ reminders +++++
 map <Left> :echo "No! Use H"<cr>
 map <Right> :echo "No! Use L"<cr>
 map <Up> :echo "No! Use K"<cr>
 map <Down> :echo "No! Use J"<cr>
 
-" +++++ NERDTree Config +++++
+" +++++ NERDTree config +++++
 autocmd vimenter * NERDTree
+let NERDTreeShowHidden=1 " ........ Show dot files in nerdtree
 " Use control + n to toggle NERDTree open and closed
 map <C-n> :NERDTreeToggle<CR>
 
@@ -117,7 +117,7 @@ set showmatch " .................... Highlight matches
 set hlsearch
 set rtp+=/usr/local/opt/fzf
 
-" +++++ Global Find and Replace +++++
+" +++++ global find and replace +++++
 let mapleader = "\<Space>"
 nnoremap <leader>fr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap <leader>frc :%s/\<<C-r><C-w>\>//gc<Left><Left>
@@ -148,7 +148,6 @@ xmap gs <plug>(GrepperOperator)
 endfun
 autocmd BufWritePre * call StripTrailingWhitespace()
 autocmd FileType markdown let b:noStripWhitespace=1
-
 
 " ===================== TEST  =====================
 nmap <silent> t<C-n> :TestNearest<CR>
